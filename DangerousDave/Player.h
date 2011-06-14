@@ -8,6 +8,7 @@ class Image;
 using std::vector;
 //======================
 #define  DIRETIONS 4
+#define FULL_TANK 500
 //----------------------
 class Player : public Move {
 public:
@@ -26,13 +27,16 @@ public:
 
 	int getScore(){return _score;};
 	void addPoints (int points){_score+=points;};
+
+	void fuelJetPack(){JP_fule = FULL_TANK;};
 	int getLife(){return _life;};
 	bool getJetPack(){return _hasJetpack;};
 	bool getGun() {return _gun;};
+	void setGun(){_gun=true;};
 
 public://private:
 	void restDirections();
-	bool _validDirerctios [DIRETIONS];
+	bool _validDirections [DIRETIONS];
 	bool _gutCup;
 private:
 	int _life;
@@ -41,6 +45,7 @@ private:
 	bool _gravety;
 	int _jumping;
 	int _score;
+	int JP_fule;
 	bool _gun;
 	
 
@@ -77,5 +82,5 @@ enum direct_t {Up_t,Down_t,Left_t,Right_t};
 #define PLAYER_WALK_RIGHT_PATH "graphix/player/player_walk_right.tga"
 #define PLAYER_WALK_RIGHT 7
 
-#define PLAYER_STEND_STRAIGHT_PATH "graphix/player/stend_straight.tga"
+#define PLAYER_STEND_STRAIGHT_PATH "graphix/player/player_stand.tga"
 #define PLAYER_STEND_STRAIGHT 8

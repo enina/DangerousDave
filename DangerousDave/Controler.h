@@ -1,12 +1,19 @@
 #pragma once
 
 #include "macros.h"
-#include "Level.h"
+
 //====testing===//
 
 class Menu;
 class Player;
-class Enemy;
+class Level;
+
+
+#define  START_SCREEN "levels/Splash.txt"
+#define  FRIST 1
+#define  FIRST_LEVEL "levels/first.txt"
+//....''''....''''....''''
+#define PASSING_LEVEL "levels/pass.txt"
 
 //--------------------
 class Controler{
@@ -18,17 +25,19 @@ public:
 	void idle();
 	void getSubLevelNames();
 	void mainLoop();
-	int getLevelNumber(){return _levelNumber;};
+	int getLevelNumber(){return _levelNum;};
 	Player* getPlayer(){return _player;};
 
 	
 private:
+	void levelManage(bool resetSameLevle);
+	void passingLevel();
 	void hitTest(); 
 	Player* _player ;
-	Enemy*  _enemy;
-	int _levelNumber;
+	int _levelNum;
+	bool _passing;
 	//==================
 	Menu*  _menu;
 	multimap<string,int> _hits;
-	Level _level;
+	Level* _level;
 };

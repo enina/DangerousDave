@@ -2,25 +2,27 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Menu.h"
+#include "Level.h"
 
 //============================================================================
 
 Controler::Controler(){
 
 	_player = new Player(145,500);
-	_player->setPlace(_level.loadLevel("levels/level_1.txt"));
+	_level = new Level();
+	//_player->setPlace(_level.loadLevel("levels/level_1.txt"));
 
-	_enemy = new Enemy(950,400);
 	_menu = new Menu(0,0);
 	_menu->setController(this);
-	_levelNumber=0;
-
+	_levelNum=START;
+	_level=NULL;
+	_passing=false;
+	 levelManage(false);
 }
 //-------------------------------
 Controler :: ~Controler(){
 	delete _menu;
 	delete _player;
-	delete _enemy;
 }
 //-------------------------
 void Controler::idle(){
@@ -35,15 +37,20 @@ void Controler::display() {
 
 	_menu->display();
 	_player->display();
-	_enemy->display();
-	_level.display();
+	_level->display();
 
 }
 //============================================================================
 // A callback function for the event of a keyboard button pressed
 void Controler::keyboard(unsigned char key, int x, int y) 
 {  
-	//------------
+	if (_levelNum==START)
+	{
+		cout << "dsfsdfsdfsdfdsfdsdfsdf\n";
+		_levelNum++;
+		levelManage(false);
+	}
+	//==================
 	switch(key) {
 		case 'a':
 		case 'A':
@@ -70,6 +77,9 @@ void Controler::keyboard(unsigned char key, int x, int y)
 		case 'J':
 			_player->activeJetPack();
 			break;
+		case 'b':
+		case 'B':
+			_level->setBulit(_player->getPlace(),_player->getX_Direction());
 		default:
 			_player->setDirection(NONE);
 			break;
@@ -82,9 +92,11 @@ void Controler::keyboard(unsigned char key, int x, int y)
 //============================================================================
 void Controler::mainLoop(){
 
+	if(_levelNum==START){
+		return;
+	}
 	hitTest();
 	_player->move();
-	_enemy->move();
 }
 //=============================
 void Controler::hitTest(){
@@ -95,7 +107,18 @@ void Controler::hitTest(){
 	//----------
 	Place playerNext =_player->getNextPlace();
 	_player->restDirections();
-	_hits=_level.levelLoop(playerNext);
+	_hits=_level->levelLoop(playerNext);
+	//--------------------
+	if(_passing){
+		if(_player->getPlace().getX()+PLAYER_SIZE>=SCREEN_WIDTH){
+			_levelNum++;
+			levelManage(false);
+			return;
+		}
+		_player->setDirection(RIGHT);
+		_player->_validDirections[Down_t]=false;
+		return;
+	}
 
 	//====player hit test ======//
 	//--
@@ -105,27 +128,25 @@ void Controler::hitTest(){
 
 		//==middele===
 		if ((*it).second >=playerNext.getY()&&
-			(*it).second<= playerNext.getY()+PLYER_SIZE ||
-			(*it).second+PLYER_SIZE-HIT_FAC >=playerNext.getY()&&
-			(*it).second+PLYER_SIZE<= playerNext.getY()+PLYER_SIZE){
+			(*it).second<= playerNext.getY()+PLAYER_SIZE ||
+			(*it).second+PLAYER_SIZE-HIT_FAC >=playerNext.getY()&&
+			(*it).second+PLAYER_SIZE<= playerNext.getY()+PLAYER_SIZE){
 
 			if (_player->getX_Direction() == LEFT ||_player->getX_Direction() == NONE ){
-				_player->_validDirerctios[Left_t]=false;
+				_player->_validDirections[Left_t]=false;
 			}
 			if (_player->getX_Direction() == RIGHT ||_player->getX_Direction() == NONE) {
-				_player->_validDirerctios[Right_t]=false;
+				_player->_validDirections[Right_t]=false;
 			}
 			
 		}
 			//==up / down ==
 		if((*it).second < playerNext.getY()){
-			_player->_validDirerctios[Down_t]=false;
-			cout << "on down \n";
+			_player->_validDirections[Down_t]=false;
 		}
 		//--
 		else if(((*it).second)>= playerNext.getY()){
-			cout<< "no up \n";
-			_player->_validDirerctios[Up_t]=false;
+			_player->_validDirections[Up_t]=false;
 		}
 	}
 		//=====KEYS=======//
@@ -138,7 +159,17 @@ void Controler::hitTest(){
 		oneIt door =_hits.find("Door");
 
 		if (_player->_gutCup&&door!= _hits.end()){
-			exit(0);
+			_levelNum++;
+			levelManage(false);
+			return;
+		}
+		oneIt jetPak =_hits.find("JetPack");
+		if (jetPak!= _hits.end()){
+			_player->fuelJetPack();
+		}
+		oneIt gun =_hits.find("Gun");
+		if (gun != _hits.end()){
+			_player->setGun();
 		}
 		//======prizes============//
 		hits =_hits.equal_range("Prize");
@@ -158,4 +189,37 @@ void Controler::hitTest(){
 
 	//	cout << _player->getScore();
 	//	cout << endl;
+}
+void Controler ::levelManage(bool resetSameLevle){
+	_passing = false;
+	if (resetSameLevle){
+		_player->setPlace(_level->getStartPoint());
+		return;
+	}
+	if(_level != NULL){
+		free(_level);
+		_level=NULL;
+	}
+	_level =  new Level();
+	if(_levelNum%2 == 0&&_levelNum!=START){//moving level
+		_passing=true;
+		_player->setPlace(_level->loadLevel(PASSING_LEVEL));
+		return;
+	}
+	switch (_levelNum){
+	case START:
+		cout <<"lalala111\n";
+		_player->setPlace(_level ->loadLevel(START_SCREEN));
+		break;
+	case FIRST:
+		cout <<"lalala222\n";
+		_player->setPlace(_level->loadLevel(FIRST_LEVEL));
+		break;
+	}
+}
+void Controler :: passingLevel(){
+	_player->setPlace(_level->loadLevel(PASSING_LEVEL));
+	_player->setDirection(RIGHT);
+	delete _level;
+	_level= new Level();
 }

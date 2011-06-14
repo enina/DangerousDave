@@ -15,6 +15,7 @@ using namespace std ;
 
 //==========utils=========//
 #define  START 0 
+#define FIRST 1
 #define  MAP_FACTOR 55
 //===========================
 typedef  pair<multimap<string,int>::iterator,multimap<string,int>::iterator> rangeIt;
@@ -29,7 +30,7 @@ typedef multimap<string,int>::iterator oneIt;
 const int MAX_NUMBER = 20;						//max size of file names
 
 //------------------
-#define PLYER_SIZE 55
+#define PLAYER_SIZE 55
 
 struct RGB{
 	float _r, _g, _b;

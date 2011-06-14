@@ -76,7 +76,7 @@ bool Image::Load(const char* filename)
 	}
 	else
 	{
-		cout << "Error opening file" << endl;
+		cout << "Error opening file:"<<filename << endl;
 		return -1;
 	}
  

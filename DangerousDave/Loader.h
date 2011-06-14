@@ -15,6 +15,9 @@
 #include "Soil_bg.h"
 #include "Cup.h"
 #include "Diamond.h"
+#include "Enemy.h"
+#include "JetPack.h"
+#include "Gun.h"
 
 #include <list>
 //-------------
@@ -27,15 +30,16 @@ public:
 
 	void loadLevel(char * levelPath);
 	list<SmartPtr<Still>> getStilList(){return _stillObj;} ;
+	list<SmartPtr<Move>> getMoveList(){return _moveObj;};
 	Place getPlayerPlace(){return _playerStart ;};
 private:
-	void parsFile();
+	void parseFile();
 	
 
 private:
 	ifstream _levelFile;
 	list<SmartPtr<Still>>_stillObj;
-	//list<Move*>_moveObj;
+	list<SmartPtr<Move>>_moveObj;
 
 	Place _playerStart;
 		
@@ -49,8 +53,10 @@ private:
 #define PIPE 'b'
 #define SOIL 'm'
 #define CUP 'c'
-#define GRAUND 'm'//the bg that looks like durt
+#define GROUND 'm'//the bg that looks like durt
 #define DIAMOND 'a'
+#define ENEMY 'q'
+#define GUN 'G'
 //=======
 #define FIRE 'f'
 #define WATHER 't'

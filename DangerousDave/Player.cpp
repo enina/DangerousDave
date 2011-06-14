@@ -7,13 +7,14 @@ Player::Player (float xplace,float yplace):Move( xplace, yplace) {
 
 	_className = "Player";
 	_hasJetpack = false;
-	_gun = false;
 	_movingY = NONE;
 	_movingX= NONE;
 	_jumping=NO_JUMP;
 	_gravety =true;
 	_gutCup = false;
 	_score = 0;
+	JP_fule = 0;
+	_gun = false;
 
 	restDirections();
 
@@ -42,7 +43,7 @@ Player::~Player () {
 void Player :: restDirections(){
 
 	for(int i = START ;i <DIRETIONS;i++){
-		_validDirerctios[i]=true;
+		_validDirections[i]=true;
 	}
 }
 //-----------------------
@@ -79,13 +80,16 @@ void Player::setJump(){
 
 	setDirection(UP);
 
-	if(_jumping == NO_JUMP&&!_validDirerctios[Down_t]){	
+	if(_jumping == NO_JUMP&&!_validDirections[Down_t]){	
 		_jumping=START;
 	}
 }
 //----------------------
 void Player::activeJetPack() {
 
+	if(JP_fule<=START&&!_hasJetpack){
+		return;
+	}
 	_jumping = NO_JUMP;
 	_hasJetpack = !_hasJetpack ;
 
@@ -108,6 +112,10 @@ int Player::getImageIdx()  {
 		else{
 			_imageIndex= JETPAK_RIGHT;
 		}
+		JP_fule--;
+		if(JP_fule<= START){
+			activeJetPack();
+		}
 	}
 	return _imageIndex;
 }
@@ -116,7 +124,7 @@ void Player ::move(){
 
 	bool jump=false;
 	//-----------
-	if(!_validDirerctios[Up_t]){//||!_validDirerctios[Down_t]){
+	if(!_validDirections[Up_t]){//||!_validDirections[Down_t]){
 
 		_jumping=NO_JUMP;
 		setDirection(DOWN);
@@ -151,17 +159,17 @@ void Player ::move(){
 		_imageIndex=PLAYER_STEND_STRAIGHT;
 	}
 	//---------------------------------------
-	if(!_validDirerctios[Up_t] &&_movingY == UP){ 
+	if(!_validDirections[Up_t] &&_movingY == UP){ 
 		_movingY=NONE;
 	}
-	if (!_validDirerctios[Down_t]&&_movingY==DOWN){
+	if (!_validDirections[Down_t]&&_movingY==DOWN){
 		_movingY=NONE;
 	}
 	//--
-	if(!_validDirerctios[Left_t] &&_movingX == LEFT){
+	if(!_validDirections[Left_t] &&_movingX == LEFT){
 		_movingX=NONE;
 	}
-	if(!_validDirerctios[Right_t] && _movingX==RIGHT){
+	if(!_validDirections[Right_t] && _movingX==RIGHT){
 		_movingX=NONE;
 	}
 //===================

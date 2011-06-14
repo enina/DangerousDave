@@ -34,7 +34,7 @@ int main(int argc, char** argv)
 // OpenGL initializing values
 void init()
 {
-	glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB);
+	glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGBA );//|GLUT_ALPHA);
 	glutInitWindowSize (SCREEN_WIDTH,SCREEN_HEIGHT); 
 	glutInitWindowPosition (0,0);
 	glutCreateWindow ("Dangerous Dave");

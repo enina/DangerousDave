@@ -14,14 +14,14 @@ class Move : public Display {
 
 		virtual ~Move ();
 		virtual void display();
-		void move();
+		virtual void move();
 		void setDirection(direction dir);
-		//setPlace or similar
+		virtual hitRet_t setHit(){return hitRet_t(getName(),_place.getY());};
 		direction getX_Direction() {return _xDirection;};
 		direction getY_Direction() {return _yDirection;};
 	protected:
 
-		virtual int getImageIdx() {return 0;};
+		virtual int getImageIdx(){return START;};
 		virtual void init(vector<char*>& filenames);
 
 		direction _movingX,

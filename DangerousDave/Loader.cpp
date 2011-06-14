@@ -9,19 +9,19 @@ Loader :: Loader(){
 //--------------------
 void Loader ::loadLevel(char * levelPath){
 
-	if (_levelFile.is_open()){
+	_stillObj.clear();
+	//_moveObj.clear();
 
-		_stillObj.clear();
-		//_moveObj.clear();
-		_levelFile.close();
-	}
 	_levelFile.open(levelPath);
 	// chek open ();
-	parsFile();
-	_levelFile.close();
+	if (_levelFile.is_open()) {
+		parseFile();
+		_levelFile.close();
+	}else
+		cout<<"Failed to open level file:"<<levelPath<<endl;
 }
 //-----------------------------
-void Loader::parsFile(){
+void Loader::parseFile(){
 
 	string  objSymble;
 	//----------------
@@ -34,7 +34,7 @@ void Loader::parsFile(){
 		for(col=START; col<objSymble.length() ; col++){
 
 			switch(objSymble[col]){
-				
+
 				case WALL :
 					_stillObj.push_back( (new Wall ((MAP_FACTOR * col),
 						(SCREEN_HEIGHT - MAP_FACTOR * row))));
@@ -55,12 +55,13 @@ void Loader::parsFile(){
 					break;
 					//-----
 				case JET_PACK :
-					_playerStart=Place((MAP_FACTOR * col),(SCREEN_HEIGHT - MAP_FACTOR * row));
+					_stillObj.push_back(new JetPack (MAP_FACTOR * col,
+						SCREEN_HEIGHT - MAP_FACTOR * row));
 					break;
 					//------
 				case DOOR :
 					_stillObj.push_back(new Door (MAP_FACTOR * col,
-											SCREEN_HEIGHT - MAP_FACTOR * row));
+						SCREEN_HEIGHT - MAP_FACTOR * row));
 					break;
 					//------
 
@@ -79,6 +80,15 @@ void Loader::parsFile(){
 						SCREEN_HEIGHT - MAP_FACTOR * row));
 					break;
 					//------
+				case GUN :
+					_stillObj.push_back( new Gun(MAP_FACTOR * col,
+						SCREEN_HEIGHT - MAP_FACTOR * row));
+					break;
+					//===========move========================//
+				case ENEMY :
+					_moveObj.push_back( new Enemy (MAP_FACTOR * col,
+						SCREEN_HEIGHT - MAP_FACTOR * row));
+					break;
 			}//swithch
 
 
