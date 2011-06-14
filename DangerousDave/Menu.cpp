@@ -157,29 +157,18 @@ void Menu::drawMenuItemCaption(Place* place,Image* caption){
 }
 int Menu::getScore() {
 	
-	static int i = 0;
-	int score = i++/1000;
-	
-	return score;
 
-	//return _controller->getPlayer()->getScore();
+	return _controller->getPlayer()->getScore();
 }
 
 int Menu::getLevel() {
 
-	static int j = 0;
-
-	int level = (++j /1000) % NUM_OF_ALL_LEVELS;
-	return level;
-
-	//uncomment after level integration completed
-	//return _controller->getLevelNumber();
+	return _controller->getLevelNumber();
 }
 
 void Menu::drawLifes() 
 {
-	//int numLifes = _controller->getPlayer()->getLife();
-	int numLifes = 3;
+	int numLifes = _controller->getPlayer()->getLife();
 
 	float initialX = _lifesPlace->getX();
 

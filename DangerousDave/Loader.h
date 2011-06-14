@@ -59,4 +59,4 @@ private:
 #define GUN 'G'
 //=======
 #define FIRE 'f'
-#define WATHER 't'
+#define WATER 't'

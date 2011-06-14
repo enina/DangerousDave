@@ -13,6 +13,7 @@ Player::Player (float xplace,float yplace):Move( xplace, yplace) {
 	_gravety =true;
 	_gutCup = false;
 	_score = 0;
+	_life=3;
 	JP_fule = 0;
 	_gun = false;
 

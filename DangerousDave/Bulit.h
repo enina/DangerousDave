@@ -13,7 +13,7 @@ private:
 	//int _imageIn;
 };
 
-#define BULIT_IMAGE_R "graphix/world/kadurR.tga"
-#define BULIT_IMAGE_L "graphix/world/kadurL.tga"
+#define RIGHT_BULLET_IMAGE "graphix/misc/right_bullet.tga"
+#define LEFT_BULLET_IMAGE "graphix/misc/left_bullet.tga"
 #define  ENEMY_SIZE 55
 
