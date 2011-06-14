@@ -1,7 +1,7 @@
-#include "Bulit.h"
+#include "Bullet.h"
 
 
-Bulit::Bulit  (float xplace,float yplace,direction dir):Move( xplace, yplace) {
+Bullet::Bullet  (float xplace,float yplace,direction dir):Move( xplace, yplace) {
 
 	vector<char*> filenames;
 
@@ -17,7 +17,7 @@ Bulit::Bulit  (float xplace,float yplace,direction dir):Move( xplace, yplace) {
 	setDirection(dir);
 }
 //--------------------------------------------
-void Bulit::move() {
+void Bullet::move() {
 	
 	Move::move();
 

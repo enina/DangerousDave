@@ -1,8 +1,9 @@
 #include "Level.h"
+#include "Bullet.h"
 //---------------
 
 Level ::Level(){
-	_playerBulit =NULL;
+	_playerBullet =NULL;
 	clearData();
 	
 };
@@ -12,10 +13,10 @@ Place Level :: loadLevel(char * levelFile){
 		clearData();
 	}
 	//------------
-	_loder.loadLevel(levelFile);
-	_allStillObj = _loder.getStilList();
-	_playerStart = _loder.getPlayerPlace();
-	_allMoveObj = _loder.getMoveList();
+	_loader.loadLevel(levelFile);
+	_allStillObj = _loader.getStilList();
+	_playerStart = _loader.getPlayerPlace();
+	_allEnemys = _loader.getMoveList();
 	//--------
 	_valid = true;
 	setPlayingMap();
@@ -28,12 +29,12 @@ void Level :: clearData(){
 	_allStillObj.clear();
 	_hits.clear();
 	_playingobj.clear();
-	_allMoveObj.clear();
+	_allEnemys.clear();
 
-	if(_playerBulit!= NULL){
-		free(_playerBulit);
+	if(_playerBullet!= NULL){
+		free(_playerBullet);
 	}
-	_playerBulit =NULL;
+	_playerBullet =NULL;
 }
 //---------------------------
 multimap<string,int> Level :: levelLoop(Place p_left_botem){
@@ -70,15 +71,42 @@ multimap<string,int> Level :: levelLoop(Place p_left_botem){
 		}
 	}
 	//============move=========================
-	list<SmartPtr<Move>>::iterator Mit;
+	list<SmartPtr<Enemy>>::iterator Mit;
 	//-------------
-	for(Mit= _allMoveObj.begin();Mit != _allMoveObj.end();++Mit){
-
+	for(Mit= _allEnemys.begin();Mit !=_allEnemys.end();++Mit){
+		if(!(*Mit)->isValid()){
+			Mit=_allEnemys.erase(Mit);
+			if(Mit ==_allEnemys.end()){
+				break;
+			}
+		}
 		(*Mit)->move();
 		hitTest(&(*((*Mit))) ,playerY);
 	}
-	if(_playerBulit){
-		_playerBulit -> move();
+	if(_playerBullet){
+		Place hitObjPlace;
+		Place bulitPlace= _playerBullet->getPlace();
+		//--------
+		//==bulit hit somthig ==
+		_playerBullet -> move();
+		for (curObj=_playingobj.begin();curObj!=_playingobj.end();++curObj){
+			hitObjPlace =((*curObj).second)-> getPlace();
+
+			if(bulitPlace.facEq(hitObjPlace,PLAYER_SIZE)){
+				
+				delete (_playerBullet);
+				_playerBullet=NULL;
+				break;
+			}
+		}
+		//==bulit hit enemy  ==
+		for(Mit= _allEnemys.begin();Mit != _allEnemys.end();++Mit){
+			hitObjPlace = (*Mit)->getPlace();
+
+			if(bulitPlace.facEq(hitObjPlace,PLAYER_SIZE)){
+				(*Mit)->setKill();
+			}
+		}	
 	}
 
 	return (_hits);
@@ -101,14 +129,14 @@ void Level::display(){
 		(*it).second->display();
 	}
 	//========move======================
-	list<SmartPtr<Move>>::iterator Mit;
+	list<SmartPtr<Enemy>>::iterator Mit;
 	//-------------
-	for(Mit= _allMoveObj.begin();Mit != _allMoveObj.end();++Mit){
+	for(Mit= _allEnemys.begin();Mit != _allEnemys.end();++Mit){
 
 		(*Mit)->display();
 	}
-	if(_playerBulit){
-		_playerBulit->display();
+	if(_playerBullet){
+		_playerBullet->display();
 	}
 	//===================================
 }
@@ -162,6 +190,7 @@ void Level:: setPlayingMap(){
 void Level:: slideWord(int dir){
 
 	list<SmartPtr<Still>>::iterator it;
+	list<SmartPtr<Enemy>>::iterator Mit;
 	const int slidSpeed =5;
 	//--------------------
 	
@@ -170,13 +199,17 @@ void Level:: slideWord(int dir){
 			
 			(*it)->glide(dir*slidSpeed);
 		}
+		//========enemys===
+		for(Mit= _allEnemys.begin();Mit != _allEnemys.end();++Mit){
+			(*Mit)->display();
+		}
 		setPlayingMap();
 		glutPostRedisplay();	
 	}
 }
 //-----------------------------------------
 void Level:: setBulit(Place startP,direction dir){
-	if (_playerBulit != NULL){
+	if (_playerBullet != NULL){
 		return;
 	}
 	//-------
@@ -185,5 +218,5 @@ void Level:: setBulit(Place startP,direction dir){
 		dir = RIGHT;
 	}
 
-	_playerBulit = new Bulit(startP.getX(),startP.getY(),dir);
+	_playerBullet = new Bullet(startP.getX(),startP.getY(),dir);
 }

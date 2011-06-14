@@ -86,7 +86,7 @@ void Loader::parseFile(){
 					break;
 					//===========move========================//
 				case ENEMY :
-					_moveObj.push_back( new Enemy (MAP_FACTOR * col,
+					_enemys.push_back( new Enemy (MAP_FACTOR * col,
 						SCREEN_HEIGHT - MAP_FACTOR * row));
 					break;
 			}//swithch

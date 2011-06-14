@@ -5,15 +5,18 @@
 #include "macros.h"
 #include "Loader.h"
 #include "display.h"
-#include "Bulit.h"
 #include <map>
+
+//------------------
+#define HIT_FAC 5
+
 //--------------
 typedef pair <int,SmartPtr<Still>> stillPair;
 
 typedef multimap<int,SmartPtr<Still>>::iterator stillXmapIt;
 
 typedef  pair<stillXmapIt,stillXmapIt> stillXmapRange;
-
+class Bullet;
 
 
 //--------------
@@ -34,15 +37,13 @@ private:
 private:
 	
 	list<SmartPtr<Still>> _allStillObj;
-	list<SmartPtr<Move>>_allMoveObj;
+	list<SmartPtr<Enemy>>_allEnemys;
 	multimap<int,SmartPtr<Still>> _playingobj;//playing obj, store by x
 	multimap<string,int> _hits;
 	
 	bool _valid;
 	Place _playerStart;
-	Loader _loder;
-	Bulit* _playerBulit;
+	Loader _loader;
+	Bullet* _playerBullet;
 
 };
-//------------------
-#define HIT_FAC 5

@@ -17,7 +17,7 @@ Controler::Controler(){
 	_levelNum=START;
 	_level=NULL;
 	_passing=false;
-	 levelManage(false);
+	levelManage(false);
 }
 //-------------------------------
 Controler :: ~Controler(){
@@ -79,7 +79,10 @@ void Controler::keyboard(unsigned char key, int x, int y)
 			break;
 		case 'b':
 		case 'B':
-			_level->setBulit(_player->getPlace(),_player->getX_Direction());
+			if(_player->getGun()){
+				_level->setBulit(_player->getPlace(),_player->getX_Direction());
+			}
+			break;
 		default:
 			_player->setDirection(NONE);
 			break;
@@ -132,15 +135,15 @@ void Controler::hitTest(){
 			(*it).second+PLAYER_SIZE-HIT_FAC >=playerNext.getY()&&
 			(*it).second+PLAYER_SIZE<= playerNext.getY()+PLAYER_SIZE){
 
-			if (_player->getX_Direction() == LEFT ||_player->getX_Direction() == NONE ){
-				_player->_validDirections[Left_t]=false;
-			}
-			if (_player->getX_Direction() == RIGHT ||_player->getX_Direction() == NONE) {
-				_player->_validDirections[Right_t]=false;
-			}
-			
+				if (_player->getX_Direction() == LEFT ||_player->getX_Direction() == NONE ){
+					_player->_validDirections[Left_t]=false;
+				}
+				if (_player->getX_Direction() == RIGHT ||_player->getX_Direction() == NONE) {
+					_player->_validDirections[Right_t]=false;
+				}
+
 		}
-			//==up / down ==
+		//==up / down ==
 		if((*it).second < playerNext.getY()){
 			_player->_validDirections[Down_t]=false;
 		}
@@ -149,42 +152,42 @@ void Controler::hitTest(){
 			_player->_validDirections[Up_t]=false;
 		}
 	}
-		//=====KEYS=======//
-		oneIt cup = _hits.find("Cup");
+	//=====KEYS=======//
+	oneIt cup = _hits.find("Cup");
 
-		if (cup!= _hits.end()){
-			_player->_gutCup = true;
-		}
-			//======//
-		oneIt door =_hits.find("Door");
+	if (cup!= _hits.end()){
+		_player->_gutCup = true;
+	}
+	//======//
+	oneIt door =_hits.find("Door");
 
-		if (_player->_gutCup&&door!= _hits.end()){
-			_levelNum++;
-			levelManage(false);
-			return;
-		}
-		oneIt jetPak =_hits.find("JetPack");
-		if (jetPak!= _hits.end()){
-			_player->fuelJetPack();
-		}
-		oneIt gun =_hits.find("Gun");
-		if (gun != _hits.end()){
-			_player->setGun();
-		}
-		//======prizes============//
-		hits =_hits.equal_range("Prize");
-		for(it = hits.first ;it != hits.second;++it){
-			_player->addPoints(((*it).second));
-		}
-		//==========================//
-		//====glide==================
-		oneIt glide =_hits.find("Glide");
+	if (_player->_gutCup&&door!= _hits.end()){
+		_levelNum++;
+		levelManage(false);
+		return;
+	}
+	oneIt jetPak =_hits.find("JetPack");
+	if (jetPak!= _hits.end()){
+		_player->fuelJetPack();
+	}
+	oneIt gun =_hits.find("Gun");
+	if (gun != _hits.end()){
+		_player->setGun();
+	}
+	//======prizes============//
+	hits =_hits.equal_range("Prize");
+	for(it = hits.first ;it != hits.second;++it){
+		_player->addPoints(((*it).second));
+	}
+	//==========================//
+	//====glide==================
+	oneIt glide =_hits.find("Glide");
 
-		if (glide!= _hits.end()){
-			Place temp =_player->getPlace();
-			temp.moveX((*glide).second);
-			_player->setPlace(temp);
-		}
+	if (glide!= _hits.end()){
+		Place temp =_player->getPlace();
+		temp.moveX((*glide).second);
+		_player->setPlace(temp);
+	}
 
 
 	//	cout << _player->getScore();
@@ -204,6 +207,7 @@ void Controler ::levelManage(bool resetSameLevle){
 	if(_levelNum%2 == 0&&_levelNum!=START){//moving level
 		_passing=true;
 		_player->setPlace(_level->loadLevel(PASSING_LEVEL));
+		_player->clearKeys();
 		return;
 	}
 	switch (_levelNum){

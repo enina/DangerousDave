@@ -2,9 +2,9 @@
 #include "Move.h"
 
 //-------------------------
-class Bulit: public Move {
+class Bullet: public Move {
 public:
-	Bulit  (float xplace,float yplace,direction dir);
+	Bullet  (float xplace,float yplace,direction dir);
 	virtual void move();
 	void setPlace(Place newPlace){_place = newPlace;};
 protected:

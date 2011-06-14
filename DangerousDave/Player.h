@@ -9,6 +9,7 @@ using std::vector;
 //======================
 #define  DIRETIONS 4
 #define FULL_TANK 500
+#define NO_JUMP -1
 //----------------------
 class Player : public Move {
 public:
@@ -34,6 +35,7 @@ public:
 	bool getGun() {return _gun;};
 	void setGun(){_gun=true;};
 
+	void clearKeys(){_gun=_gutCup=_hasJetpack=false;_jumping=NO_JUMP;};
 public://private:
 	void restDirections();
 	bool _validDirections [DIRETIONS];
@@ -55,7 +57,6 @@ enum direct_t {Up_t,Down_t,Left_t,Right_t};
 
 #define  PL_SIZE 55
 
-#define NO_JUMP -1
 #define JUMP_MAX 30
 //========   images ===========
 #define JAMP_LEFT_PATH "graphix/player/jamp_left.tga"

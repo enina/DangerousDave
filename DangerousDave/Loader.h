@@ -30,7 +30,7 @@ public:
 
 	void loadLevel(char * levelPath);
 	list<SmartPtr<Still>> getStilList(){return _stillObj;} ;
-	list<SmartPtr<Move>> getMoveList(){return _moveObj;};
+	list<SmartPtr<Enemy>> getMoveList(){return _enemys;};
 	Place getPlayerPlace(){return _playerStart ;};
 private:
 	void parseFile();
@@ -39,7 +39,7 @@ private:
 private:
 	ifstream _levelFile;
 	list<SmartPtr<Still>>_stillObj;
-	list<SmartPtr<Move>>_moveObj;
+	list<SmartPtr<Enemy>>_enemys;
 
 	Place _playerStart;
 		

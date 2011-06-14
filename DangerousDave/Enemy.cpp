@@ -1,15 +1,17 @@
 #include "Enemy.h"
-
+#include "Bullet.h"
 
 Enemy::Enemy  (float xplace,float yplace):Move( xplace, yplace) {
 
 	vector<char*> filenames;
 
-	filenames.insert(filenames.end(),MONSTER_IMG);   
+	filenames.insert(filenames.end(),MONSTER_IMG); 
 
 	init(filenames);
 
 	_curPos = 0;
+
+	_bullet = NULL;
 
 }
 Enemy::~Enemy () {
@@ -42,5 +44,11 @@ void Enemy::move() {
 			break;
 	}
 	Move::move();
+
 	_curPos = ++_curPos % (factor*4);
+}
+
+
+Bullet* Enemy::getBullet() {
+	return _bullet;
 }

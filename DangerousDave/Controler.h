@@ -10,7 +10,7 @@ class Level;
 
 
 #define  START_SCREEN "levels/Splash.txt"
-#define  FRIST 1
+
 #define  FIRST_LEVEL "levels/first.txt"
 //....''''....''''....''''
 #define PASSING_LEVEL "levels/pass.txt"
@@ -30,14 +30,14 @@ public:
 
 	
 private:
-	void levelManage(bool resetSameLevle);
-	void passingLevel();
 	void hitTest(); 
+	void levelManage(bool reset);
+	void passingLevel();
 	Player* _player ;
-	int _levelNum;
-	bool _passing;
 	//==================
+	int _levelNum;
 	Menu*  _menu;
 	multimap<string,int> _hits;
 	Level* _level;
+	bool _passing;
 };
