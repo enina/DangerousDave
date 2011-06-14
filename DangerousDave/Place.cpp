@@ -18,7 +18,7 @@ Place::Place (float  x,float y):_x(x),_y(y){
 // FullName:  Place::moveX
 // Access:    public 
 // allow to move only x without go 
-// of the SCREEN_WIDTH as difined in macros
+// of the SCREEN_WIDTH as defined in macros
 // Parameter: float moveFactor : how much to move
 // Parameter: float sizeFactor : obj size
 //************************************
