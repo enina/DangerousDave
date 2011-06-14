@@ -18,9 +18,9 @@ Enemy::~Enemy () {
 
 void Enemy::move() {
 
-	int numSubPos = 7;
+	int factor = 7;
 
-	int curDirection = _curPos / numSubPos;
+	int curDirection = _curPos / factor;
 
 	switch(curDirection) {
 		case 0:
@@ -42,6 +42,6 @@ void Enemy::move() {
 	}
 	Move::move();
 
-	_curPos = ++_curPos % (numSubPos*4);
+	_curPos = ++_curPos % (factor*4);
 
 }
