@@ -172,6 +172,7 @@ int Menu::getLevel() {
 	int level = (++j /1000) % NUM_OF_ALL_LEVELS;
 	return level;
 
+	//uncomment after level integration completed
 	//return _controller->getLevelNumber();
 }
 

@@ -18,6 +18,7 @@ Enemy::~Enemy () {
 
 void Enemy::move() {
 
+	//number of moves in each direction
 	int factor = 7;
 
 	int curDirection = _curPos / factor;
