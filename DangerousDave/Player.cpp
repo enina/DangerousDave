@@ -211,3 +211,19 @@ void Player ::move(){
 	}
 
 }
+
+void Player::kill() {
+	_alive = false;
+}
+
+bool Player::isAlive() {
+	return _alive ;
+}
+
+bool Player::resurrect() {
+	if (_life) {
+		_life--;
+		_alive = true;
+	}
+	return isAlive();
+}

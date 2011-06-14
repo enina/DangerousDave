@@ -104,27 +104,27 @@ bool Place :: operator != (const Place& oter ){
 // Method:    facEq
 // FullName:  Place::facEq
 // Access:    public
-// allow us to tell if tow places are ABAUT seme
-// Returns:   true if tow places are ABAUT seme
-// Parameter: const Place & oter : other place
+// allow us to tell if two places are ABOUT the same
+// Returns:   true if two places are ABOUT the same
+// Parameter: const Place & other : other place
 // Parameter: float factor acurecy factor
 //************************************
-bool Place :: facEq (const Place& oter,float factor){
+bool Place :: facEq (const Place& other,float factor){
 
-	bool xRezult = false;
-	bool yRezult = false;
+	bool xResult = false;
+	bool yResult = false;
 	//-----------
-	if ((oter._x > _x-factor)&& (oter._x < _x+factor))
+	if ((other._x > _x-factor)&& (other._x < _x+factor))
 	{
-		xRezult=true;
+		xResult=true;
 	}
 	//---
-	if ((oter._y > _y-factor)&& (oter._y < _y+factor))
+	if ((other._y > _y-factor)&& (other._y < _y+factor))
 	{
-		yRezult=true;
+		yResult=true;
 	}
 
-	return ( yRezult && xRezult);
+	return ( yResult && xResult);
 }
 //-----------------------------------------
 bool Place :: facXYEq(const Place& oter,float xfactor,float yfactor){

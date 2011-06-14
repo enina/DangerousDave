@@ -1,5 +1,6 @@
 #include "Level.h"
 #include "Bullet.h"
+#include "Player.h"
 //---------------
 
 Level ::Level(){
@@ -37,23 +38,23 @@ void Level :: clearData(){
 	_playerBullet =NULL;
 }
 //---------------------------
-multimap<string,int> Level :: levelLoop(Place p_left_botem){
-
+multimap<string,int> Level :: executeTurn(Player* player)
+{
 	stillXmapIt curObj;
 	stillXmapRange xRange;
 	
-	float playerY = p_left_botem.getY();
+	float playerY = player->getPlace().getY();
 	//=============
 	if(!_valid){
 		clearData();
 		return _hits;
 	}
-	if(p_left_botem.getX()<=START-(PLAYER_SIZE/3)){
+	if(player->getPlace().getX()<=START-(PLAYER_SIZE/3)){
 		slideWord(1);
 		_hits.insert(hitRet_t("Glide",SCREEN_WIDTH-PLAYER_SIZE));
 		return _hits ;
 	}
-	if(p_left_botem.getX()+PLAYER_SIZE>=SCREEN_WIDTH){
+	if(player->getPlace().getX()+PLAYER_SIZE>=SCREEN_WIDTH){
 		slideWord(-1);
 		_hits.insert(hitRet_t("Glide",-(SCREEN_WIDTH-PLAYER_SIZE)));
 		return _hits ;
@@ -63,7 +64,7 @@ multimap<string,int> Level :: levelLoop(Place p_left_botem){
 
 	for(int i = - PLAYER_SIZE ; i<PLAYER_SIZE; i++){
 
-		xRange =_playingobj.equal_range(p_left_botem.getX()+i);//get all close x
+		xRange =_playingobj.equal_range(player->getPlace().getX()+i);//get all close x
 
 		for(curObj=xRange.first;curObj!=xRange.second;++curObj){ // check if y is close
 
@@ -71,43 +72,31 @@ multimap<string,int> Level :: levelLoop(Place p_left_botem){
 		}
 	}
 	//============move=========================
-	list<SmartPtr<Enemy>>::iterator Mit;
+	list<SmartPtr<Enemy>>::iterator enemyIter;
+	SmartPtr<Enemy> monster;
 	//-------------
-	for(Mit= _allEnemys.begin();Mit !=_allEnemys.end();++Mit){
-		if(!(*Mit)->isValid()){
-			Mit=_allEnemys.erase(Mit);
-			if(Mit ==_allEnemys.end()){
-				break;
-			}
-		}
-		(*Mit)->move();
-		hitTest(&(*((*Mit))) ,playerY);
-	}
-	if(_playerBullet){
-		Place hitObjPlace;
-		Place bulitPlace= _playerBullet->getPlace();
-		//--------
-		//==bulit hit somthig ==
-		_playerBullet -> move();
-		for (curObj=_playingobj.begin();curObj!=_playingobj.end();++curObj){
-			hitObjPlace =((*curObj).second)-> getPlace();
 
-			if(bulitPlace.facEq(hitObjPlace,PLAYER_SIZE)){
-				
-				delete (_playerBullet);
-				_playerBullet=NULL;
-				break;
-			}
-		}
-		//==bulit hit enemy  ==
-		for(Mit= _allEnemys.begin();Mit != _allEnemys.end();++Mit){
-			hitObjPlace = (*Mit)->getPlace();
+	enemyIter = _allEnemys.begin();
 
-			if(bulitPlace.facEq(hitObjPlace,PLAYER_SIZE)){
-				(*Mit)->setKill();
-			}
-		}	
+	while (enemyIter !=_allEnemys.end()) {
+		monster = (*enemyIter);
+		
+		if(!monster->isValid()) {
+			enemyIter = _allEnemys.erase(enemyIter);
+			continue;
+		}
+		monster->move();
+		hitTest(&(*monster),playerY);
+		checkEnemyBulletHits(&(*monster),player);
+		if (!player->isAlive())
+			break;
+		enemyIter++;
 	}
+
+	if (player->isAlive()) {
+		checkPlayerBulletHits();
+	}
+	
 
 	return (_hits);
 }
@@ -129,11 +118,11 @@ void Level::display(){
 		(*it).second->display();
 	}
 	//========move======================
-	list<SmartPtr<Enemy>>::iterator Mit;
+	list<SmartPtr<Enemy>>::iterator enemyIter;
 	//-------------
-	for(Mit= _allEnemys.begin();Mit != _allEnemys.end();++Mit){
+	for(enemyIter= _allEnemys.begin();enemyIter != _allEnemys.end();++enemyIter){
 
-		(*Mit)->display();
+		(*enemyIter)->display();
 	}
 	if(_playerBullet){
 		_playerBullet->display();
@@ -208,7 +197,7 @@ void Level:: slideWord(int dir){
 	}
 }
 //-----------------------------------------
-void Level:: setBulit(Place startP,direction dir){
+void Level:: setBullet(Place startP,direction dir){
 	if (_playerBullet != NULL){
 		return;
 	}
@@ -219,4 +208,86 @@ void Level:: setBulit(Place startP,direction dir){
 	}
 
 	_playerBullet = new Bullet(startP.getX(),startP.getY(),dir);
+}
+
+
+void Level::checkEnemyBulletHits(Enemy* pEnemy,Player* player)  {
+
+	stillXmapIt curObj;
+
+	list<SmartPtr<Enemy>>::iterator enemyIter;
+	Place bulletPlace;
+
+	if(pEnemy->getBullet()){
+		Place hitObjPlace;
+		bulletPlace= pEnemy->getBullet()->getPlace();
+		//--------
+		//==Check collissions with wall or other still object ==
+		pEnemy->getBullet()->move();
+		for (curObj=_playingobj.begin();curObj!=_playingobj.end();++curObj){
+			hitObjPlace =((*curObj).second)-> getPlace();
+			if(bulletPlace.facEq(hitObjPlace,PLAYER_SIZE)){
+				
+				pEnemy->destroyBullet();
+				break;
+			}
+		}
+	}
+
+	if(pEnemy->getBullet()){
+		bulletPlace= pEnemy->getBullet()->getPlace();
+		//==bullet hit player  ==
+		if(bulletPlace.facEq(player->getPlace(),PLAYER_SIZE)){
+			player->kill();
+			pEnemy->destroyBullet();
+		}
+	}
+
+	if(pEnemy->getBullet())
+		pEnemy->getBullet()->move();
+}
+
+
+void Level::checkPlayerBulletHits() {
+
+	stillXmapIt curObj;
+
+	Place hitObjPlace;
+	Place bulletPlace ;
+
+
+	list<SmartPtr<Enemy>>::iterator enemyIter;
+
+
+
+	if(_playerBullet){
+
+		bulletPlace = _playerBullet->getPlace();
+		//--------
+		//==bullet hit something ==
+		_playerBullet -> move();
+		for (curObj=_playingobj.begin();curObj!=_playingobj.end();++curObj){
+			hitObjPlace =((*curObj).second)-> getPlace();
+
+			if(bulletPlace.facEq(hitObjPlace,PLAYER_SIZE)){
+				
+				delete (_playerBullet);
+				_playerBullet=NULL;
+				break;
+			}
+		}
+	}
+
+	if(_playerBullet){
+		//==bullet hit enemy  ==
+		SmartPtr<Enemy> monster;
+		for(enemyIter= _allEnemys.begin();enemyIter!= _allEnemys.end();++enemyIter){
+			monster = (*enemyIter);
+			hitObjPlace = monster->getPlace();
+
+			if(bulletPlace.facEq(hitObjPlace,PLAYER_SIZE)){
+				monster->kill();
+			}
+		}	
+	}
 }

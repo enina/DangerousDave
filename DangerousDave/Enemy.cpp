@@ -29,6 +29,7 @@ void Enemy::move() {
 		case 0:
 			setDirection(NONE);
 			setDirection(UP);
+			createBullet(LEFT);
 			break;
 		case 1:
 			setDirection(NONE);
@@ -37,6 +38,7 @@ void Enemy::move() {
 		case 2:
 			setDirection(NONE);
 			setDirection(DOWN);
+			createBullet(RIGHT);
 			break;
 		case 3:
 			setDirection(NONE);
@@ -48,7 +50,33 @@ void Enemy::move() {
 	_curPos = ++_curPos % (factor*4);
 }
 
+void Enemy::display() {
+	Move::display();
+	if (_bullet)
+		_bullet->display();
+}
 
 Bullet* Enemy::getBullet() {
 	return _bullet;
+}
+
+void Enemy::createBullet(direction dir) {
+
+	int dx=20;
+
+	if (dir==LEFT)
+		dx*=-1;
+
+	if (!_bullet) {
+		_bullet = new Bullet(getPlace().getX()+dx,getPlace().getY(),dir);
+	}
+}
+
+void Enemy::destroyBullet() {
+
+	if (_bullet) {
+		delete _bullet;
+		_bullet = NULL;
+	}
+
 }

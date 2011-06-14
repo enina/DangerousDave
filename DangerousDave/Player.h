@@ -36,6 +36,9 @@ public:
 	void setGun(){_gun=true;};
 
 	void clearKeys(){_gun=_gutCup=_hasJetpack=false;_jumping=NO_JUMP;};
+	void kill();
+	bool resurrect();
+	bool isAlive();
 public://private:
 	void restDirections();
 	bool _validDirections [DIRETIONS];
@@ -49,6 +52,7 @@ private:
 	int _score;
 	int JP_fule;
 	bool _gun;
+	bool _alive;
 	
 
 };

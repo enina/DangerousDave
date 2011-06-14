@@ -80,7 +80,7 @@ void Controler::keyboard(unsigned char key, int x, int y)
 		case 'b':
 		case 'B':
 			if(_player->getGun()){
-				_level->setBulit(_player->getPlace(),_player->getX_Direction());
+				_level->setBullet(_player->getPlace(),_player->getX_Direction());
 			}
 			break;
 		default:
@@ -110,7 +110,16 @@ void Controler::hitTest(){
 	//----------
 	Place playerNext =_player->getNextPlace();
 	_player->restDirections();
-	_hits=_level->levelLoop(playerNext);
+	_hits=_level->executeTurn(_player);
+
+
+	if (!_player->isAlive()) {
+		levelManage(true);
+		_player->resurrect();
+		return;
+	}
+
+
 	//--------------------
 	if(_passing){
 		if(_player->getPlace().getX()+PLAYER_SIZE>=SCREEN_WIDTH){
@@ -136,10 +145,10 @@ void Controler::hitTest(){
 			(*it).second+PLAYER_SIZE<= playerNext.getY()+PLAYER_SIZE){
 
 				if (_player->getX_Direction() == LEFT ||_player->getX_Direction() == NONE ){
-					_player->_validDirections[Left_t]=false;
+					//_player->_validDirections[Left_t]=false;
 				}
 				if (_player->getX_Direction() == RIGHT ||_player->getX_Direction() == NONE) {
-					_player->_validDirections[Right_t]=false;
+					//_player->_validDirections[Right_t]=false;
 				}
 
 		}
@@ -149,7 +158,7 @@ void Controler::hitTest(){
 		}
 		//--
 		else if(((*it).second)>= playerNext.getY()){
-			_player->_validDirections[Up_t]=false;
+			//_player->_validDirections[Up_t]=false;
 		}
 	}
 	//=====KEYS=======//
@@ -193,9 +202,9 @@ void Controler::hitTest(){
 	//	cout << _player->getScore();
 	//	cout << endl;
 }
-void Controler ::levelManage(bool resetSameLevle){
+void Controler ::levelManage(bool reset){
 	_passing = false;
-	if (resetSameLevle){
+	if (reset){
 		_player->setPlace(_level->getStartPoint());
 		return;
 	}

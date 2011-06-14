@@ -17,6 +17,7 @@ typedef multimap<int,SmartPtr<Still>>::iterator stillXmapIt;
 
 typedef  pair<stillXmapIt,stillXmapIt> stillXmapRange;
 class Bullet;
+class Player;
 
 
 //--------------
@@ -25,15 +26,17 @@ class Level {
 public:
 	Level();
 	Place loadLevel(char * levelFile);
-	multimap<string,int> levelLoop(Place p_left_botem);
+	multimap<string,int> executeTurn(Player* pPlayer);
 	void display();
 	Place getStartPoint(){return _playerStart;};
-	void setBulit(Place startP,direction dir);
+	void setBullet(Place startP,direction dir);
 private:
 	void clearData();
 	void setPlayingMap();//by screen wight
 	void slideWord(int dir);//left +1 right -1
 	void hitTest(Display * obj,float playerY);
+	void checkPlayerBulletHits() ;
+	void checkEnemyBulletHits(Enemy* pEnemy,Player* player) ;
 private:
 	
 	list<SmartPtr<Still>> _allStillObj;
