@@ -22,7 +22,7 @@ class Move : public Display {
 	protected:
 
 		virtual int getImageIdx(){return START;};
-		virtual void init(vector<char*>& filenames);
+		virtual void init(vector<const char*>& filenames);
 
 		direction _movingX,
 			_movingY;

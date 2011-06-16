@@ -3,7 +3,7 @@
 
 Bullet::Bullet  (float xplace,float yplace,direction dir):Move( xplace, yplace) {
 
-	vector<char*> filenames;
+	vector<const char*> filenames;
 
 	if(dir == LEFT){  
 		filenames.insert(filenames.end(),LEFT_BULLET_IMAGE);  

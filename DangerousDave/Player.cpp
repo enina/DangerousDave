@@ -19,7 +19,7 @@ Player::Player (float xplace,float yplace):Move( xplace, yplace) {
 
 	restDirections();
 
-	vector<char*> filenames;
+	vector<const char*> filenames;
 
 	/*0*/filenames.insert(filenames.end(),JAMP_LEFT_PATH);   
 	/*1*/filenames.insert(filenames.end(),JETPAK_RIGHT_PATH);
@@ -113,6 +113,7 @@ int Player::getImageIdx()  {
 		else{
 			_imageIndex= JETPAK_RIGHT;
 		}
+	
 		JP_fule--;
 		if(JP_fule<= START){
 			activeJetPack();

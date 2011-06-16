@@ -3,7 +3,7 @@
 
 Enemy::Enemy  (float xplace,float yplace):Move( xplace, yplace) {
 
-	vector<char*> filenames;
+	vector<const char*> filenames;
 
 	filenames.insert(filenames.end(),MONSTER_IMG); 
 

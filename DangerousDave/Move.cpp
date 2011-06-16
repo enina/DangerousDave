@@ -21,7 +21,7 @@ Move::~Move(){
 
 //============================================================================
 
-void Move::init(vector<char*>& filenames) {
+void Move::init(vector<const char*>& filenames) {
 
 	Image* image = NULL;
 
