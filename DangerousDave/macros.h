@@ -30,7 +30,7 @@ typedef multimap<string,int>::iterator oneIt;
 const int MAX_NUMBER = 20;						//max size of file names
 
 //------------------
-#define PLAYER_SIZE 50
+#define PLAYER_SIZE 55
 
 struct RGB{
 	float _r, _g, _b;

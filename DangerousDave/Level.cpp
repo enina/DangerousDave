@@ -43,18 +43,20 @@ multimap<string,int> Level :: executeTurn(Player* player)
 	stillXmapIt curObj;
 	stillXmapRange xRange;
 	
-	float playerY = player->getPlace().getY();
+	Place nextPlace = player->getNextPlace();
+
+	float playerY = nextPlace.getY();
 	//=============
 	if(!_valid){
 		clearData();
 		return _hits;
 	}
-	if(player->getPlace().getX()<=START-(PLAYER_SIZE/3)){
+	if(nextPlace.getX()<=START-(PLAYER_SIZE/3)){
 		slideWord(1);
 		_hits.insert(hitRet_t("Glide",SCREEN_WIDTH-PLAYER_SIZE));
 		return _hits ;
 	}
-	if(player->getPlace().getX()+PLAYER_SIZE>=SCREEN_WIDTH){
+	if(nextPlace.getX()+PLAYER_SIZE>=SCREEN_WIDTH){
 		slideWord(-1);
 		_hits.insert(hitRet_t("Glide",-(SCREEN_WIDTH-PLAYER_SIZE)));
 		return _hits ;
@@ -64,7 +66,7 @@ multimap<string,int> Level :: executeTurn(Player* player)
 
 	for(int i = - PLAYER_SIZE ; i<PLAYER_SIZE; i++){
 
-		xRange =_playingobj.equal_range(player->getPlace().getX()+i);//get all close x
+		xRange =_playingobj.equal_range(nextPlace.getX()+i);//get all close x
 
 		for(curObj=xRange.first;curObj!=xRange.second;++curObj){ // check if y is close
 

@@ -145,10 +145,10 @@ void Controler::hitTest(){
 			(*it).second+PLAYER_SIZE<= playerNext.getY()+PLAYER_SIZE){
 
 				if (_player->getX_Direction() == LEFT ||_player->getX_Direction() == NONE ){
-					//_player->_validDirections[Left_t]=false;
+					_player->_validDirections[Left_t]=false;
 				}
 				if (_player->getX_Direction() == RIGHT ||_player->getX_Direction() == NONE) {
-					//_player->_validDirections[Right_t]=false;
+					_player->_validDirections[Right_t]=false;
 				}
 
 		}
@@ -158,7 +158,7 @@ void Controler::hitTest(){
 		}
 		//--
 		else if(((*it).second)>= playerNext.getY()){
-			//_player->_validDirections[Up_t]=false;
+			_player->_validDirections[Up_t]=false;
 		}
 	}
 	//=====KEYS=======//
