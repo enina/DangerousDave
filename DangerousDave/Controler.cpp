@@ -10,7 +10,6 @@ Controler::Controler(){
 
 	_player = new Player(145,500);
 	_level = new Level();
-	//_player->setPlace(_level.loadLevel("levels/level_1.txt"));
 
 	_menu = new Menu(0,0);
 	_menu->setController(this);
