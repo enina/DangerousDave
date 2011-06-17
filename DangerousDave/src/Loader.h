@@ -4,11 +4,13 @@
 #pragma once 
 #include "macros.h"
 #include "Place.h"
+#include "Display.h"
+#include "Enemy.h"
 
 #define WALL 'w'
 #define PERL 'e'
 #define PLAYER 'p'
-#define JET_PACK 'j'
+#define JP 'j'
 #define	DOOR 'd'
 #define PIPE 'b'
 #define SOIL 'm'

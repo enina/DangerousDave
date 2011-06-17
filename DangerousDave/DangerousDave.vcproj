@@ -203,6 +203,10 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\src\Display.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\Enemy.cpp"
 				>
 			</File>

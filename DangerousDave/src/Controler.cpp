@@ -220,11 +220,9 @@ void Controler ::levelManage(bool reset){
 	}
 	switch (_levelNum){
 	case START:
-		cout <<"lalala111\n";
 		_player->setPlace(_level ->loadLevel(START_SCREEN));
 		break;
 	case FIRST:
-		cout <<"lalala222\n";
 		_player->setPlace(_level->loadLevel(FIRST_LEVEL));
 		break;
 	}
