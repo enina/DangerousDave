@@ -5,12 +5,12 @@
 	becuse all Obstacles stay in the game even afte hit.
 */
 #pragma once
-#include "Still.h"
-class Obstacles :public Still {
+#include "Display.h"
+class Obstacle :public Display {
 public:
 
-	Obstacles(float xplace,float yplace);
-	virtual hitRet_t setHit() =0;
+	Obstacle(float xplace,float yplace);
+	virtual HitResult setHit() =0;
 	
 
 };

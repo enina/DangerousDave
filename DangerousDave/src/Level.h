@@ -11,9 +11,9 @@
 #define HIT_FAC 5
 
 //--------------
-typedef pair <int,SmartPtr<Still>> stillPair;
+typedef pair <int,SmartPtr<Display>> stillPair;
 
-typedef multimap<int,SmartPtr<Still>>::iterator stillXmapIt;
+typedef multimap<int,SmartPtr<Display>>::iterator stillXmapIt;
 
 typedef  pair<stillXmapIt,stillXmapIt> stillXmapRange;
 class Bullet;
@@ -39,9 +39,9 @@ private:
 	void checkEnemyBulletHits(Enemy* pEnemy,Player* player) ;
 private:
 	
-	list<SmartPtr<Still>> _allStillObj;
+	list<SmartPtr<Display>> _allStillObj;
 	list<SmartPtr<Enemy>>_allEnemys;
-	multimap<int,SmartPtr<Still>> _playingobj;//playing obj, store by x
+	multimap<int,SmartPtr<Display>> _playingobj;//playing obj, store by x
 	multimap<string,int> _hits;
 	
 	bool _valid;

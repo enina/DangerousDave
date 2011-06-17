@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Still.h"
+#include "Display.h"
 #include <map>
 
 using std::map;
@@ -8,11 +8,11 @@ using std::map;
 class Controler;
 class Image;
 
-class Menu : public Still {
+class Menu : public Display{
 public:
 	Menu (float xPlace,float yPlace);
-	~Menu();
-	virtual hitRet_t setHit(){return hitRet_t(getName(),1);};
+	virtual ~Menu();
+	virtual HitResult setHit(){return HitResult(getName(),1);};
 	virtual void display();
 	void setController(Controler*  controller){_controller=controller;};
 private:

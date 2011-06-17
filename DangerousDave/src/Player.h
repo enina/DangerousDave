@@ -7,8 +7,8 @@
 class Image;
 using std::vector;
 //======================
-#define  DIRETIONS 4
-#define FULL_TANK 500
+#define  DIRECTIONS 4
+#define FULL_TANK 50000
 #define NO_JUMP -1
 //----------------------
 class Player : public Move {
@@ -41,7 +41,7 @@ public:
 	bool isAlive();
 public://private:
 	void restDirections();
-	bool _validDirections [DIRETIONS];
+	bool _validDirections [DIRECTIONS];
 	bool _gutCup;
 private:
 	int _life;
