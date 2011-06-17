@@ -5,7 +5,7 @@
 Door::Door(float xplace,float yplace):Keys(xplace,yplace){
 
 	_className ="Door";
-	_image = new Image(DOOR_IMAGE);
+//	_image = new Image(DOOR_IMAGE);
 }
 //-------------------
 hitRet_t Door::setHit(){

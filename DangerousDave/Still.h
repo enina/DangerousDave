@@ -14,9 +14,14 @@ class Still : public Display {
 public:
 
 	Still(float xplace,float yPlace);//set valid true 
-	virtual hitRet_t setHit()=0; //set valid false nothing to return 
+	Still( const char* objName,const char* imageFileName,int objValue,float xplace,float yPlace);
+	virtual ~Still();
+	virtual hitRet_t setHit() {return hitRet_t(getName(),_objValue);}; 
 	virtual void display();
+
 protected:
-	
 	Image* _image;
+
+private:
+	void init(const char* objName,const char* imageFileName=NULL,int objValue=0) ;
 };

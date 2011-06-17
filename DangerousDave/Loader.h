@@ -18,8 +18,29 @@
 #include "Enemy.h"
 #include "JetPack.h"
 #include "Gun.h"
-
 #include <list>
+
+//------------------------
+#define WALL 'w'
+#define PERL 'e'
+#define PLAYER 'p'
+#define JET_PACK 'j'
+#define	DOOR 'd'
+#define PIPE 'b'
+#define SOIL 'm'
+#define CUP 'c'
+#define GROUND 'm'//the bg that looks like durt
+#define DIAMOND 'a'
+#define ENEMY 'q'
+#define GUN 'G'
+//=======
+#define FIRE 'f'
+#define WATER 't'
+
+#define  DOOR_NAME "Door"
+#define  DOOR_IMAGE "graphix/world/door.tga"
+#define  DOOR_VALUE 1
+
 //-------------
 class Loader {
 
@@ -44,19 +65,3 @@ private:
 	Place _playerStart;
 		
 };
-//------------------------
-#define WALL 'w'
-#define PERL 'e'
-#define PLAYER 'p'
-#define JET_PACK 'j'
-#define	DOOR 'd'
-#define PIPE 'b'
-#define SOIL 'm'
-#define CUP 'c'
-#define GROUND 'm'//the bg that looks like durt
-#define DIAMOND 'a'
-#define ENEMY 'q'
-#define GUN 'G'
-//=======
-#define FIRE 'f'
-#define WATER 't'

@@ -9,4 +9,3 @@ public:
 	virtual hitRet_t setHit();
 };
 //-----------------------
-#define  DOOR_IMAGE "graphix/world/door.tga"

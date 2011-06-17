@@ -26,4 +26,5 @@ class Display {
 		bool _valid; 
 		Place _place;
 		string _className;
+		int    _objValue;
 };

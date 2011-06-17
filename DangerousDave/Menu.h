@@ -11,7 +11,7 @@ class Image;
 class Menu : public Still {
 public:
 	Menu (float xPlace,float yPlace);
-	~Menu();
+	virtual ~Menu();
 	virtual hitRet_t setHit(){return hitRet_t(getName(),1);};
 	virtual void display();
 	void setController(Controler*  controller){_controller=controller;};
