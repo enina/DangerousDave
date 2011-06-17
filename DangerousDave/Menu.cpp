@@ -1,11 +1,11 @@
 #include "davepch.h"
 #include "Menu.h"
-#include "Still.h"
+#include "Display.h"
 #include "Place.h"
 #include "Controler.h"
 #include "Player.h"
 
-Menu::Menu (float xPlace,float yPlace):Still(xPlace,yPlace)
+Menu::Menu (float xPlace,float yPlace):Display(xPlace,yPlace)
 {
 	char fileName[MAX_NUMBER*3];
 

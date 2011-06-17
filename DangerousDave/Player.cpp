@@ -44,7 +44,7 @@ Player::~Player () {
 //-------------------
 void Player :: restDirections(){
 
-	for(int i = START ;i <DIRETIONS;i++){
+	for(int i = START ;i <DIRECTIONS;i++){
 		_validDirections[i]=true;
 	}
 }

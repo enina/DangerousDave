@@ -1,11 +1,29 @@
 #include "davepch.h"
 #include "Loader.h"
+#include "Prize.h"
 
 Loader :: Loader(){
 
-	_stillObj.clear();
-	//_moveObj.clear();
+	//stills -start
+	
+	_objInfoMap.insert(OBJ_MAP_ENTRY(WALL)); 
+	_objInfoMap.insert(OBJ_MAP_ENTRY(PIPE)); 
+	_objInfoMap.insert(OBJ_MAP_ENTRY(DOOR)); 
+	_objInfoMap.insert(OBJ_MAP_ENTRY(SOIL)); 
+	
+	//stills -end
 
+	//prizes -start
+	_objInfoMap.insert(OBJ_MAP_ENTRY(JP)); 
+	_objInfoMap.insert(OBJ_MAP_ENTRY(DIAMOND)); 
+	_objInfoMap.insert(OBJ_MAP_ENTRY(PERL)); 
+	_objInfoMap.insert(OBJ_MAP_ENTRY(GUN)); 
+	_objInfoMap.insert(OBJ_MAP_ENTRY(CUP)); 
+
+	//prizes -end
+
+	//movings - start
+	//movings - end
 }
 //--------------------
 void Loader ::loadLevel(char * levelPath){
@@ -37,50 +55,29 @@ void Loader::parseFile(){
 		for(col=START; col<objSymble.length() ; col++){
 			xPos = MAP_FACTOR * col;
 			yPos = SCREEN_HEIGHT - MAP_FACTOR * row;
-			switch(objSymble[col]){
+			char curSymbol = objSymble[col];
+			ObjInfoHandle objInfo = _objInfoMap[curSymbol];
 
+			switch(curSymbol){
 				case WALL :
-					_stillObj.push_back( new Wall (xPos,yPos));
+					objInfo->_value = yPos;
+				case PIPE :
+				case SOIL :
+				case DOOR:
+				    _stillObj.push_back(new Display (objInfo,xPos,yPos));
 					break;
-					//----
-				case PERL :
-					_stillObj.push_back(new Perl (xPos,yPos));
-					break;
-					//----
 				case DIAMOND :
-					_stillObj.push_back(new Diamond (xPos,yPos));
+				case PERL:
+				case JP:
+				case CUP:
+				case GUN :
+				    _stillObj.push_back(new Prize (objInfo,xPos,yPos));
 					break;
 					//-----
+					//===========move========================//
 				case PLAYER:
 					_playerStart=Place(xPos,yPos);
 					break;
-					//-----
-				case JET_PACK :
-					_stillObj.push_back(new JetPack (xPos,yPos));
-					break;
-					//------
-				case DOOR :
-					_stillObj.push_back(new Still (DOOR_NAME,DOOR_IMAGE,DOOR_VALUE,xPos,yPos));
-					break;
-					//------
-
-				case PIPE :
-					_stillObj.push_back( new Pipe (xPos,yPos));
-					break;
-					//------
-				case SOIL :
-					_stillObj.push_back( new Soil_bg (xPos,yPos));
-					break;
-					//------
-				case CUP :
-					_stillObj.push_back( new Cup(MAP_FACTOR * col,
-						SCREEN_HEIGHT - MAP_FACTOR * row));
-					break;
-					//------
-				case GUN :
-					_stillObj.push_back( new Gun(xPos,yPos));
-					break;
-					//===========move========================//
 				case ENEMY :
 					_enemys.push_back( new Enemy (xPos,yPos));
 					break;

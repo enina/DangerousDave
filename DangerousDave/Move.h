@@ -16,7 +16,7 @@ class Move : public Display {
 		virtual void display();
 		virtual void move();
 		void setDirection(direction dir);
-		virtual hitRet_t setHit(){return hitRet_t(getName(),_place.getY());};
+		virtual HitResult setHit(){return HitResult(getName(),_place.getY());};
 		direction getX_Direction() {return _xDirection;};
 		direction getY_Direction() {return _yDirection;};
 	protected:

@@ -180,10 +180,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Cup.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\davepch.cpp"
 				>
 				<FileConfiguration
@@ -196,10 +192,6 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\Diamond.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\Display.cpp"
 				>
 			</File>
@@ -208,19 +200,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Gun.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\Image.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\JetPack.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Keys.cpp"
 				>
 			</File>
 			<File
@@ -240,15 +220,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Obstacles.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Perl.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Pipe.cpp"
+				RelativePath=".\Obstacle.cpp"
 				>
 			</File>
 			<File
@@ -260,23 +232,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Prize.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Soill_bg.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Still.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\TheMain.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Wall.cpp"
 				>
 			</File>
 		</Filter>
@@ -294,15 +250,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Cup.h"
-				>
-			</File>
-			<File
 				RelativePath=".\davepch.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Diamond.h"
 				>
 			</File>
 			<File
@@ -315,14 +263,6 @@
 			</File>
 			<File
 				RelativePath=".\Image.h"
-				>
-			</File>
-			<File
-				RelativePath=".\JetPack.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Keys.h"
 				>
 			</File>
 			<File
@@ -350,15 +290,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Obstacles.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Perl.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Pipe.h"
+				RelativePath=".\Obstacle.h"
 				>
 			</File>
 			<File
@@ -375,22 +307,6 @@
 			</File>
 			<File
 				RelativePath=".\SmartPtr.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Soil_bg.h"
-				>
-			</File>
-			<File
-				RelativePath=".\SomeObject.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Still.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Wall.h"
 				>
 			</File>
 		</Filter>

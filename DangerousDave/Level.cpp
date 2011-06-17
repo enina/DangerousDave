@@ -54,12 +54,12 @@ multimap<string,int> Level :: executeTurn(Player* player)
 	}
 	if(nextPlace.getX()<=START-(PLAYER_SIZE/3)){
 		slideWord(1);
-		_hits.insert(hitRet_t("Glide",SCREEN_WIDTH-PLAYER_SIZE));
+		_hits.insert(HitResult("Glide",SCREEN_WIDTH-PLAYER_SIZE));
 		return _hits ;
 	}
 	if(nextPlace.getX()+PLAYER_SIZE>=SCREEN_WIDTH){
 		slideWord(-1);
-		_hits.insert(hitRet_t("Glide",-(SCREEN_WIDTH-PLAYER_SIZE)));
+		_hits.insert(HitResult("Glide",-(SCREEN_WIDTH-PLAYER_SIZE)));
 		return _hits ;
 	}
 	//==============
@@ -150,7 +150,7 @@ void Level::hitTest(Display * obj,float playerY){
 //----------------------------
 void Level:: setPlayingMap(){
 
-	list<SmartPtr<Still>>::iterator it;
+	list<SmartPtr<Display>>::iterator it;
 	int objX;
 	stillPair playing;
 	//--------------------
@@ -169,7 +169,7 @@ void Level:: setPlayingMap(){
 		//--------
 		objX = ((*it)->getPlace()).getX();
 
-		if(objX>SCREEN_WIDTH ||objX< START ){ // no on screen
+		if(objX>SCREEN_WIDTH ||objX< START ){ // not on screen
 			continue;
 		}
 		playing.first = objX;
@@ -181,7 +181,7 @@ void Level:: setPlayingMap(){
 //----------------------------------------
 void Level:: slideWord(int dir){
 
-	list<SmartPtr<Still>>::iterator it;
+	list<SmartPtr<Display>>::iterator it;
 	list<SmartPtr<Enemy>>::iterator Mit;
 	const int slidSpeed =5;
 	//--------------------

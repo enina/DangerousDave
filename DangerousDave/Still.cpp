@@ -6,9 +6,8 @@ Still::Still(float xplace,float yPlace):Display(xplace,yPlace) {
 	init("still");
 }
 
-Still ::Still( const char* objName,const char* imageFileName,int objValue,float xplace,float yPlace)
-																:Display(xplace,yPlace){
-	init(objName,imageFileName,objValue);
+Still::Still( ObjInfoHandle infoHandle,float xplace,float yPlace):Display(xplace,yPlace){
+	init(infoHandle->_name,infoHandle->_imageName,infoHandle->_value);
 }
 
 Still::~Still() {

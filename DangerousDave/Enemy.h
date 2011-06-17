@@ -15,7 +15,7 @@ public:
 	virtual void move();
 	virtual void display();
 	void setPlace(Place newPlace){_place = newPlace;};
-	void kill(){_valid= false;};//temprry
+	void kill(){_valid= false;};//temporary
 	Bullet* getBullet();
 	void destroyBullet();
 private:

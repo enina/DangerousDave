@@ -9,16 +9,11 @@
 #pragma once
 //-----------
 #include "macros.h"
-#include "Still.h"
+#include "Display.h"
 
-class Prize : public Still {
+class Prize : public Display {
 
 public:
-	Prize(float xplace,float yplace,int prizeValu);
-	virtual int getValu(){return _value;};
-	hitRet_t setHit(){_valid= false; return hitRet_t("Prize",getValu());}; //return the Prize  and value NON VIRTUAL!!;
-
-private:
-
-	const int _value;//all Heirs will update;
+	Prize(ObjInfoHandle infoHandle,float xplace,float yplace):Display(infoHandle,xplace,yplace){};
+	HitResult setHit(){_valid= false; return Display::setHit();}; 
 };

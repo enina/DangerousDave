@@ -9,7 +9,6 @@
 class Bullet: public Move {
 public:
 	Bullet  (float xplace,float yplace,direction dir);
-	void setPlace(Place newPlace){_place = newPlace;};
 };
 
 
