@@ -10,7 +10,6 @@
 //=============
 #include "Wall.h"
 #include "Perl.h"
-#include "Door.h"
 #include "Pipe.h"
 #include "Soil_bg.h"
 #include "Cup.h"

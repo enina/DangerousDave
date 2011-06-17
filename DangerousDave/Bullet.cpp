@@ -18,8 +18,3 @@ Bullet::Bullet  (float xplace,float yplace,direction dir):Move( xplace, yplace) 
 	setDirection(dir);
 }
 //--------------------------------------------
-void Bullet::move() {
-	
-	Move::move();
-
-}
