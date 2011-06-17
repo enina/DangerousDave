@@ -204,10 +204,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Door.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\Enemy.cpp"
 				>
 			</File>
@@ -311,10 +307,6 @@
 			</File>
 			<File
 				RelativePath=".\display.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Door.h"
 				>
 			</File>
 			<File
