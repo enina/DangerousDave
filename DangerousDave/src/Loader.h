@@ -5,7 +5,6 @@
 #include "macros.h"
 
 #include "Place.h"
-#include "Still.h"
 #include "Move.h"
 //=============
 #include "Wall.h"

@@ -41,6 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -115,6 +116,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -173,18 +175,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\Bullet.cpp"
+				RelativePath=".\src\Bullet.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Controler.cpp"
+				RelativePath=".\src\Controler.cpp"
 				>
 			</File>
 			<File
-				>
-			</File>
-			<File
-				RelativePath=".\davepch.cpp"
+				RelativePath=".\src\davepch.cpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -204,56 +203,27 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\src\Enemy.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Display.cpp"
+				RelativePath=".\src\Image.cpp"
 				>
 			</File>
 			<File
+				RelativePath=".\src\Level.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Enemy.cpp"
+				RelativePath=".\src\Loader.cpp"
 				>
 			</File>
 			<File
+				RelativePath=".\src\Menu.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Image.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\JetPack.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\Keys.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\JetPack.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Keys.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Level.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Loader.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Menu.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Move.cpp"
+				RelativePath=".\src\Move.cpp"
 				>
 			</File>
 			<File
@@ -261,43 +231,15 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\Perl.cpp"
+				RelativePath=".\src\Place.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\Pipe.cpp"
+				RelativePath=".\src\Player.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Perl.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Pipe.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Place.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Player.cpp"
-				>
-			</File>
-			<File
-				>
-			</File>
-			<File
-				>
-			</File>
-			<File
-				>
-			</File>
-			<File
-				RelativePath=".\TheMain.cpp"
-				>
-			</File>
-			<File
+				RelativePath=".\src\TheMain.cpp"
 				>
 			</File>
 		</Filter>
@@ -307,80 +249,51 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\Bullet.h"
+				RelativePath=".\src\Bullet.h"
 				>
 			</File>
 			<File
-				RelativePath=".\Controler.h"
+				RelativePath=".\src\Controler.h"
 				>
 			</File>
 			<File
+				RelativePath=".\src\davepch.h"
 				>
 			</File>
 			<File
-				RelativePath=".\davepch.h"
+				RelativePath=".\src\display.h"
 				>
 			</File>
 			<File
+				RelativePath=".\src\Enemy.h"
 				>
 			</File>
 			<File
-				RelativePath=".\display.h"
+				RelativePath=".\src\Image.h"
 				>
 			</File>
 			<File
+				RelativePath=".\src\Kill.h"
 				>
 			</File>
 			<File
-				RelativePath=".\Enemy.h"
+				RelativePath=".\src\Level.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\Gun.h"
+				RelativePath=".\src\Loader.h"
 				>
 			</File>
 			<File
-				RelativePath=".\Image.h"
+				RelativePath=".\include\macros.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\JetPack.h"
+				RelativePath=".\src\Menu.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\Keys.h"
-				>
-			</File>
-			<File
-				RelativePath=".\JetPack.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Keys.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Kill.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Level.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Loader.h"
-				>
-			</File>
-			<File
-				RelativePath=".\macros.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Menu.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Move.h"
+				RelativePath=".\src\Move.h"
 				>
 			</File>
 			<File
@@ -388,67 +301,19 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\Perl.h"
+				RelativePath=".\src\Place.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\Pipe.h"
+				RelativePath=".\src\Player.h"
 				>
 			</File>
 			<File
-				RelativePath=".\Perl.h"
+				RelativePath=".\src\Prize.h"
 				>
 			</File>
 			<File
-				RelativePath=".\Pipe.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Place.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Player.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Prize.h"
-				>
-			</File>
-			<File
-				RelativePath=".\SmartPtr.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Soil_bg.h"
-				>
-			</File>
-			<File
-				RelativePath=".\SomeObject.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Still.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Wall.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\Soil_bg.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\SomeObject.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\Still.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\Wall.h"
+				RelativePath=".\include\SmartPtr.h"
 				>
 			</File>
 		</Filter>
