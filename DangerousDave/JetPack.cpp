@@ -1,5 +1,5 @@
+#include "davepch.h"
 #include "JetPack.h"
-#include "Image.h"
 //---------------
 Image JetPack :: _image(J_P_IMAGE); 
 //-----------

@@ -2,9 +2,9 @@
 //	The program draws an image and translate it according to 
 //	keyboard pressing buttons. 'l' - left, 'r' - right, 'u' - up, 'd' - down. 
 //
-
+#include "davepch.h"
 #include "Controler.h"
-#include "macros.h"
+
 //---------------------
 //========prototype========//
 void init();

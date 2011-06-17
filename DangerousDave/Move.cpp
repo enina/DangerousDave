@@ -1,6 +1,6 @@
+#include "davepch.h"
 #include "Move.h"
-#include "Image.h"
-#include "macros.h"
+
 
 //============================================================================
 

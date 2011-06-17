@@ -4,7 +4,7 @@
 #pragma once
 #include "macros.h"
 #include "display.h"
-#include "Image.h"
+class Image;
 //---------------------
 
 //level will get this and put it a map

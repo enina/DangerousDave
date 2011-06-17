@@ -1,5 +1,6 @@
+#include "davepch.h"
 # include "Pipe.h"
-#include "Image.h"
+
 //------------------
 Image Pipe :: _image(PIPE_IMAGE); 
 

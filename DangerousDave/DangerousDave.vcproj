@@ -45,7 +45,8 @@
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough="davepch.h"
 				WarningLevel="3"
 				DebugInformationFormat="4"
 			/>
@@ -183,6 +184,18 @@
 				>
 			</File>
 			<File
+				RelativePath=".\davepch.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath=".\Diamond.cpp"
 				>
 			</File>
@@ -286,6 +299,10 @@
 			</File>
 			<File
 				RelativePath=".\Cup.h"
+				>
+			</File>
+			<File
+				RelativePath=".\davepch.h"
 				>
 			</File>
 			<File

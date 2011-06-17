@@ -1,5 +1,6 @@
+#include "davepch.h"
 # include "Soil_bg.h"
-#include "Image.h"
+
 //------------------
 Image Soil_bg :: _image(SOIL_IMAGE); 
 

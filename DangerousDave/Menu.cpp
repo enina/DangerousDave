@@ -1,8 +1,6 @@
-#include <stdio.h>
-#include <math.h>
+#include "davepch.h"
 #include "Menu.h"
 #include "Still.h"
-#include "Image.h"
 #include "Place.h"
 #include "Controler.h"
 #include "Player.h"

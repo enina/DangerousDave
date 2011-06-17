@@ -1,5 +1,5 @@
+#include "davepch.h"
 #include "Gun.h"
-#include "Image.h"
 
 //-----------
 Gun ::Gun(float xplace,float yplace):Keys(xplace,yplace){

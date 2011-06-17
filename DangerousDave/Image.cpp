@@ -1,8 +1,4 @@
-#include <iostream>
-#include <fstream>
-#include <stdio.h>
-#include "macros.h"
-#include "Image.h"
+#include "davepch.h"
 
 using namespace std;
  //============================================================================

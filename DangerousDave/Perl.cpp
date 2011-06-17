@@ -1,3 +1,4 @@
+#include "davepch.h"
 #include "Perl.h"
 
 Image Perl :: _image(PERL_IMAGE); 
