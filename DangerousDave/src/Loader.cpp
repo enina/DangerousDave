@@ -29,7 +29,8 @@ void Loader::parseFile(){
 	int row=START;
 	int col =START;
 	//-------------
-	while(!_levelFile.eof()){
+	while(!_levelFile.eof())
+	{
 
 		getline(_levelFile,objSymble);
 		for(col=START; col<objSymble.length() ; col++){
