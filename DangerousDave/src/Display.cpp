@@ -2,7 +2,7 @@
 # include "display.h"
 
 Display::Display(float xplace,float yPlace):_place(xplace,yPlace) {
-	init("Display");
+	init("display");
 }
 Display::Display( ObjInfoHandle infoHandle,float xplace,float yPlace):_place(xplace,yPlace){
 	init(infoHandle->_name,infoHandle->_imageName,infoHandle->_value);

@@ -8,6 +8,18 @@ using std::map;
 class Controler;
 class Image;
 
+
+#define IMG_MAP_ENTRY(KEY,FILE) pair<int,SmartPtr<Image>>(KEY,SmartPtr<Image>(new Image(FILE)))
+#define PLC_MAP_ENTRY(KEY,X,Y)  pair<int,SmartPtr<Place>>(KEY,SmartPtr<Place>(new Place(X ,Y)))
+
+
+typedef enum IMAGE_ID_E {
+	ZERO_DIGIT,ONE_DIGIT,TWO_DIGIT,THREE_DIGIT,FOUR_DIGIT,FIVE_DIGIT,
+	SIX_DIGIT,SEVEN_DIGIT,EIGHT_DIGIT,NINE_DIGIT,
+	DAVE,DAVES,SCORE,LEVEL,JETPACK,GUN,MSG_ID,
+	SCORE_CAPTION,LEVEL_CAPTION
+} IMAGE_ID;
+
 class Menu : public Display{
 public:
 	Menu (float xPlace,float yPlace);
@@ -24,22 +36,8 @@ private:
 	int getLifes();
 private:
 	Controler* _controller;
-	Image*		_dave;
-	Image*		_scoreCaption;
-	Image*		_davesCaption;
-	Image*		_levelCaption;
-	Image*		_jetpack;
-	Image*		_gun;
-	Image*		_message;
 
-	map<int,Image*> _digitMap;
-	Place*	    _scoreCaptionPlace;
-	Place*	    _scorePlace;
-	Place*		_levelCaptionPlace;
-	Place*	    _levelPlace;
-	Place*		_lifesCaptionPlace;
-	Place*		_lifesPlace;
-	Place*		_jetpackCaptionPlace;
-	Place*		_gunCaptionPlace;
-	Place*		_messagePlace;
+	map<int,SmartPtr<Image>> _imageMap;
+	map<int,SmartPtr<Place>> _placeMap;
+
 };

@@ -81,7 +81,7 @@ public:
 	Loader();
 	~Loader();
 
-	void loadLevel(char * levelPath);
+	void loadLevel(const char * levelPath);
 	list<SmartPtr<Display>> getStilList(){return _stillObj;} ;
 	list<SmartPtr<Enemy>> getMoveList(){return _enemys;};
 	Place getPlayerPlace(){return _playerStart ;};

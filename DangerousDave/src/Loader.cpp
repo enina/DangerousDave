@@ -19,25 +19,20 @@ Loader :: Loader(){
 	_objInfoMap.insert(OBJ_MAP_ENTRY(PERL)); 
 	_objInfoMap.insert(OBJ_MAP_ENTRY(GUN)); 
 	_objInfoMap.insert(OBJ_MAP_ENTRY(CUP)); 
-
 	//prizes -end
-
-	//movings - start
-	//movings - end
 }
 //--------------------
-void Loader ::loadLevel(char * levelPath){
+void Loader ::loadLevel(const char * levelPath){
 
 	_stillObj.clear();
-	//_moveObj.clear();
 
 	_levelFile.open(levelPath);
-	// chek open ();
+
 	if (_levelFile.is_open()) {
 		parseFile();
 		_levelFile.close();
 	}else
-		cout<<"Failed to open level file:"<<levelPath<<endl;
+		cout<<"Failed to open level file:" << levelPath << endl;
 }
 //-----------------------------
 void Loader::parseFile(){
@@ -53,9 +48,11 @@ void Loader::parseFile(){
 
 		getline(_levelFile,objSymble);
 		for(col=START; col<objSymble.length() ; col++){
+			
 			xPos = MAP_FACTOR * col;
 			yPos = SCREEN_HEIGHT - MAP_FACTOR * row;
 			char curSymbol = objSymble[col];
+			
 			ObjInfoHandle objInfo = _objInfoMap[curSymbol];
 
 			switch(curSymbol){
@@ -83,7 +80,6 @@ void Loader::parseFile(){
 					break;
 			}//switch
 
-
 		}//for
 		row++;
 
@@ -96,7 +92,7 @@ Loader ::~Loader(){
 	if (_levelFile.is_open()){
 
 		_stillObj.clear();
-		//_moveObj.clear();
+
 		_levelFile.close();
 	}
 }

@@ -33,8 +33,7 @@ protected:
 		void addTransX(double x);
 		void addTransY(double y);
 		void normalizeCoordinate(double& coor);
-	private:
-		vector<Image*> _images;
+		vector<SmartPtr<Image>> _images;
 	
 protected:
 

@@ -20,7 +20,7 @@ void Image::Draw()
 //============================================================================
 void Image::Release()
 {
-	free(imageData);		// Free image data from memory
+	delete imageData;		// Free image data from memory
 }
 //============================================================================
 bool Image::Load(const char* filename)
@@ -37,7 +37,7 @@ bool Image::Load(const char* filename)
 		// read pixel data
 		int imageSize = tgaheader.width * tgaheader.height * tgaheader.bpp;		// Calculate image size
  
-		this->imageData = (char*) malloc(imageSize);							// Reserve space in the memory to store our image data
+		this->imageData = new  char[imageSize];							// Reserve space in the memory to store our image data
 		filestr.read((char*) this->imageData, imageSize);						// Read image data from file, into the reserved memory place
  
  

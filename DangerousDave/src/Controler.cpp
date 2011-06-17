@@ -46,7 +46,6 @@ void Controler::keyboard(unsigned char key, int x, int y)
 {  
 	if (_levelNum==START)
 	{
-		cout << "dsfsdfsdfsdfdsfdsdfsdf\n";
 		_levelNum++;
 		levelManage(false);
 	}
