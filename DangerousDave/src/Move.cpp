@@ -7,15 +7,12 @@
 Move::Move(float Xplace,float Yplace): Display( Xplace,Yplace) {
 	_className = "Move";
 	_xDirection = NONE;
-		_yDirection= NONE;
+	_yDirection= NONE;
 }
 
 //============================================================================
 
 Move::~Move(){
-	for(size_t i = 0;i < _images.size();++i) {
-		delete _images[i];
-	}
 	_images.clear();
 }
 
@@ -27,7 +24,7 @@ void Move::init(vector<const char*>& filenames) {
 
 	for(size_t i = 0;i < filenames.size();++i) {
 		image = new Image(filenames[i]);
-		_images.insert(_images.end(),image);
+		_images.insert(_images.end(),SmartPtr<Image>(image));
 	}
 }
 
@@ -85,7 +82,7 @@ void Move::move(){
 //============================================================================
 void Move::display(){
 
-	Image* curImage = NULL;
+	SmartPtr<Image> curImage = NULL;
 	int imageIdx = getImageIdx();
 	glRasterPos2d(_place.getX(),_place.getY());
 	curImage = _images[imageIdx];

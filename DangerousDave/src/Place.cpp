@@ -24,12 +24,6 @@ Place::Place (float  x,float y):_x(x),_y(y){
 // Parameter: float sizeFactor : obj size
 //************************************
 void Place::moveX(float moveFactor,float sizeFactor){
-
-// 	if ((sizeFactor=!0) && _x+moveFactor + sizeFactor >=SCREEN_WIDTH )
-// 	{
-// 		return;
-// 	}
-
 	_x+=moveFactor;
 	return;
 }
@@ -130,18 +124,18 @@ bool Place :: facEq (const Place& other,float factor){
 //-----------------------------------------
 bool Place :: facXYEq(const Place& oter,float xfactor,float yfactor){
 
-	bool xRezult = false;
-	bool yRezult = false;
+	bool xResult = false;
+	bool yResult = false;
 	//-----------
 	if ((oter._x > _x-xfactor)&& (oter._x < _x+xfactor))
 	{
-		xRezult=true;
+		xResult=true;
 	}
 	//---
 	if ((oter._y > _y-yfactor)&& (oter._y < _y+yfactor))
 	{
-		yRezult=true;
+		yResult=true;
 	}
 
-	return ( yRezult && xRezult);
+	return ( yResult && xResult);
 }

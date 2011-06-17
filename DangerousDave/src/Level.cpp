@@ -105,12 +105,13 @@ multimap<string,int> Level :: executeTurn(Player* player)
 }
 //------------------------------------------------------
 void Level::display(){
+
 	stillXmapIt it;
 	//--------------------
 
 	for(it=_playingobj.begin();it != _playingobj.end();++it){
 
-		if(!(*it).second->isValid()){ //==free un neede obj
+		if(!(*it).second->isValid()){ //==free unneeded obj
 
 			it =_playingobj.erase(it);
 

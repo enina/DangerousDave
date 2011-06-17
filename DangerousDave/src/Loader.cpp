@@ -1,25 +1,38 @@
 #include "davepch.h"
 #include "Loader.h"
+#include "Prize.h"
 
 Loader :: Loader(){
 
-	_stillObj.clear();
-	//_moveObj.clear();
+	//stills -start
+	
+	_objInfoMap.insert(OBJ_MAP_ENTRY(WALL)); 
+	_objInfoMap.insert(OBJ_MAP_ENTRY(PIPE)); 
+	_objInfoMap.insert(OBJ_MAP_ENTRY(DOOR)); 
+	_objInfoMap.insert(OBJ_MAP_ENTRY(SOIL)); 
+	
+	//stills -end
 
+	//prizes -start
+	_objInfoMap.insert(OBJ_MAP_ENTRY(JP)); 
+	_objInfoMap.insert(OBJ_MAP_ENTRY(DIAMOND)); 
+	_objInfoMap.insert(OBJ_MAP_ENTRY(PERL)); 
+	_objInfoMap.insert(OBJ_MAP_ENTRY(GUN)); 
+	_objInfoMap.insert(OBJ_MAP_ENTRY(CUP)); 
+	//prizes -end
 }
 //--------------------
-void Loader ::loadLevel(char * levelPath){
+void Loader ::loadLevel(const char * levelPath){
 
 	_stillObj.clear();
-	//_moveObj.clear();
 
 	_levelFile.open(levelPath);
-	// chek open ();
+
 	if (_levelFile.is_open()) {
 		parseFile();
 		_levelFile.close();
 	}else
-		cout<<"Failed to open level file:"<<levelPath<<endl;
+		cout<<"Failed to open level file:" << levelPath << endl;
 }
 //-----------------------------
 void Loader::parseFile(){
@@ -29,70 +42,43 @@ void Loader::parseFile(){
 	int row=START;
 	int col =START;
 	//-------------
-	while(!_levelFile.eof())
-	{
+	double xPos,yPos=0;
+
+	while(!_levelFile.eof()){
 
 		getline(_levelFile,objSymble);
 		for(col=START; col<objSymble.length() ; col++){
+			
+			xPos = MAP_FACTOR * col;
+			yPos = SCREEN_HEIGHT - MAP_FACTOR * row;
+			char curSymbol = objSymble[col];
+			
+			ObjInfoHandle objInfo = _objInfoMap[curSymbol];
 
-			switch(objSymble[col]){
-
+			switch(curSymbol){
 				case WALL :
-					_stillObj.push_back( (new Wall ((MAP_FACTOR * col),
-						(SCREEN_HEIGHT - MAP_FACTOR * row))));
-					break;
-					//----
-				case PERL :
-					_stillObj.push_back(new Perl ((MAP_FACTOR * col),
-						(SCREEN_HEIGHT - MAP_FACTOR * row)));
-					break;
-					//----
-				case DIAMOND :
-					_stillObj.push_back(new Diamond ((MAP_FACTOR * col),
-						(SCREEN_HEIGHT - MAP_FACTOR * row)));
-					break;
-					//-----
-				case PLAYER:
-					_playerStart=Place((MAP_FACTOR * col),(SCREEN_HEIGHT - MAP_FACTOR * row));
-					break;
-					//-----
-				case JET_PACK :
-					_stillObj.push_back(new JetPack (MAP_FACTOR * col,
-						SCREEN_HEIGHT - MAP_FACTOR * row));
-					break;
-					//------
-				case DOOR :
-					_stillObj.push_back(new Door (MAP_FACTOR * col,
-						SCREEN_HEIGHT - MAP_FACTOR * row));
-					break;
-					//------
-
+					objInfo->_value = yPos;
 				case PIPE :
-					_stillObj.push_back( new Pipe (MAP_FACTOR * col,
-						SCREEN_HEIGHT - MAP_FACTOR * row));
-					break;
-					//------
 				case SOIL :
-					_stillObj.push_back( new Soil_bg (MAP_FACTOR * col,
-						SCREEN_HEIGHT - MAP_FACTOR * row));
+				case DOOR:
+				    _stillObj.push_back(new Display (objInfo,xPos,yPos));
 					break;
-					//------
-				case CUP :
-					_stillObj.push_back( new Cup(MAP_FACTOR * col,
-						SCREEN_HEIGHT - MAP_FACTOR * row));
-					break;
-					//------
+				case DIAMOND :
+				case PERL:
+				case JP:
+				case CUP:
 				case GUN :
-					_stillObj.push_back( new Gun(MAP_FACTOR * col,
-						SCREEN_HEIGHT - MAP_FACTOR * row));
+				    _stillObj.push_back(new Prize (objInfo,xPos,yPos));
 					break;
+					//-----
 					//===========move========================//
-				case ENEMY :
-					_enemys.push_back( new Enemy (MAP_FACTOR * col,
-						SCREEN_HEIGHT - MAP_FACTOR * row));
+				case PLAYER:
+					_playerStart=Place(xPos,yPos);
 					break;
-			}//swithch
-
+				case ENEMY :
+					_enemys.push_back( new Enemy (xPos,yPos));
+					break;
+			}//switch
 
 		}//for
 		row++;
@@ -106,7 +92,7 @@ Loader ::~Loader(){
 	if (_levelFile.is_open()){
 
 		_stillObj.clear();
-		//_moveObj.clear();
+
 		_levelFile.close();
 	}
 }

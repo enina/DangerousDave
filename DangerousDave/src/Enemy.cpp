@@ -6,9 +6,7 @@ Enemy::Enemy  (float xplace,float yplace):Move( xplace, yplace) {
 
 	vector<const char*> filenames;
 
-	filenames.insert(filenames.end(),MONSTER_IMG); 
-
-	init(filenames);
+	_images.insert(_images.end(),new Image(MONSTER_IMG));
 
 	_curPos = 0;
 
@@ -52,13 +50,17 @@ void Enemy::move() {
 }
 
 void Enemy::display() {
+
 	Move::display();
+
 	if (_bullet)
 		_bullet->display();
 }
 
 Bullet* Enemy::getBullet() {
+
 	return _bullet;
+
 }
 
 void Enemy::createBullet(direction dir) {
