@@ -6,12 +6,9 @@ Bullet::Bullet  (float xplace,float yplace,direction dir):Move( xplace, yplace) 
 
 	vector<const char*> filenames;
 
-	if(dir == LEFT){  
-		filenames.insert(filenames.end(),LEFT_BULLET_IMAGE);  
-	}
-	else{
-		filenames.insert(filenames.end(),RIGHT_BULLET_IMAGE); 
-	}
+	const char* filename = (dir == LEFT)? LEFT_BULLET_IMAGE : RIGHT_BULLET_IMAGE;
+
+	filenames.insert(filenames.end(),filename); 
 
 	init(filenames);
 
