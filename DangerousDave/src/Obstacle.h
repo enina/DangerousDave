@@ -6,7 +6,6 @@
 */
 #pragma once
 #include "Display.h"
-
 class Obstacle :public Display {
 public:
 
