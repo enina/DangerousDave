@@ -7,9 +7,21 @@
 #include <fstream>
 #include <iostream>
 #include <map>
+#include <list>
+
+
 #include "SmartPtr.h"
 
-using namespace std ;
+using  std::map ;
+using  std::multimap;
+using  std::pair ;
+using  std::list ;
+using  std::string;
+using  std::iterator;
+using  std::cout;
+using  std::endl;
+using  std::ifstream;
+
 #pragma warning (disable : 4018)
 
 //==========utils=========//
@@ -29,7 +41,7 @@ typedef multimap<string,int>::iterator oneIt;
 const int MAX_NUMBER = 20;						//max size of file names
 
 //------------------
-#define PLAYER_SIZE 55
+#define PLAYER_SIZE 50
 
 struct RGB{
 	float _r, _g, _b;
@@ -38,3 +50,17 @@ struct RGB{
 enum direction {
 	UP,DOWN,LEFT,RIGHT,NONE
 };
+
+typedef struct ObjectInfo_s {
+	ObjectInfo_s(	const char* name,const char* imageName,int value) {
+		_name = name;
+		_imageName = imageName;
+		_value = value;
+	}
+
+	const char* _name;
+	const char* _imageName;
+	int		    _value;
+} ObjectInfo;
+
+typedef SmartPtr<ObjectInfo> ObjInfoHandle;
